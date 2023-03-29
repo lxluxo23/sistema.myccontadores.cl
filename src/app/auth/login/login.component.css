@@ -1,0 +1,29 @@
+.login-form {
+  padding: 10rem 10rem;
+}
+mat-card {
+  max-width: 350px;
+  margin: 2rem auto;
+  text-align: center;
+  height: 100%;
+}
+
+.color-button-login {
+  background-color: #44a8e2;
+}
+.color_text_login {
+  color: white;
+}
+
+.full-width-input,
+button {
+  width: 100%;
+}
+
+.separator {
+  margin-bottom: 2rem;
+}
+
+.inputLogin {
+  text-align: center;
+}

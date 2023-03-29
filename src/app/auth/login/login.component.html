@@ -1,0 +1,24 @@
+<div class="login-form animate__animated animate__zoomInDown">
+  <mat-card class="mat-elevation-z5">
+    <mat-card-content>
+      <br />
+      <div>
+        <img class="img-responsive" style="width: 80%; height: 20%" src="../../../../assets/img/logo.png" />
+      </div>
+      <br /><br />
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field class="full-width-input">
+          <input class="inputLogin" type="text" formControlName="email" matInput placeholder="Rut" required />
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input separator">
+          <input class="inputLogin" type="password" formControlName="pass" matInput placeholder="Password" required />
+        </mat-form-field>
+        <button type="submit" class="btn btn-primary color-button-login" mat-raised-button>
+          <span class="color_text_login">Login</span>
+        </button>
+        <br /><br /><br />
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
