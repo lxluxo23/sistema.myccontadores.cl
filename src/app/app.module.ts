@@ -9,24 +9,24 @@ import { AuthService } from './auth/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './shared/home/home.component';
 import { InterceptorService } from './interceptors/interceptor.service';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { AdminModule } from './admin/admin.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     HttpClientModule,
     MaterialModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AdminModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     AuthService
   ],
   bootstrap: [AppComponent]

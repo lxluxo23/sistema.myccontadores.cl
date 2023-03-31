@@ -1,0 +1,36 @@
+<mat-toolbar class="header">
+  <ng-container *ngIf="isAdmin == 'TRABAJADOR'; else viewAdmin">
+    <div *ngIf="isLogged">
+      <!-- <button mat-icon-button>
+        <mat-icon style="color: white">menu</mat-icon>
+      </button> -->
+    </div>
+    <span class="spacer"></span>
+    <div>
+      <a *ngIf="!isLogged; else viewLogout" mat-button routerLink="/login"
+        >Login</a
+      >
+    </div>
+  </ng-container>
+</mat-toolbar>
+
+<ng-template #viewLogout>
+  <a mat-button (click)="onLogout()">Salir</a>
+</ng-template>
+
+<ng-template #viewAdmin>
+  <div *ngIf="isLogged">
+    <!-- <button mat-icon-button>
+      <mat-icon style="color: white">menu</mat-icon>
+    </button> -->
+    <span style="padding-top: 20px; color: white"
+      >{{ nombreUsuario | uppercase }}
+    </span>
+  </div>
+
+  <span class="spacer"></span>
+  <div>
+    <a *ngIf="!isLogged; else viewLogout">BIENVENIDO</a>
+    <!-- mat-button routerLink="/login" -->
+  </div>
+</ng-template>

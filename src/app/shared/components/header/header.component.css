@@ -1,0 +1,16 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.header {
+  background-color: #2844a4;
+}
+
+.menuColor {
+  color: white;
+}

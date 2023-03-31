@@ -1,0 +1,87 @@
+.full {
+  width: 100%;
+}
+mat-card {
+  max-width: 750px;
+  margin: 2rem auto;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+}
+
+.main-div{
+  height: 100vh;
+  // display: flex;
+  justify-content: center;
+  // align-items: center;
+}
+.mat-form-field {
+  width: 100%;
+}
+
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  border: 2px dashed #ccc;
+  margin-top: 16px;
+}
+
+.file-upload span {
+  font-size: 16px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+
+button {
+  margin-top: 16px;
+  width: 100%;
+  background-color: aqua;
+}
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  // width: 100%;
+  border: 2px dashed #ccc;
+  padding: 32px;
+  margin-bottom: 16px;
+}
+
+.dropzone:hover {
+  border-color: #aaa;
+}
+
+.dropzone .prompt {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.dropzone .browse-button {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  color: #555;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dropzone .browse-button:hover {
+  background-color: #eee;
+  border-color: #aaa;
+  color: #222;
+}

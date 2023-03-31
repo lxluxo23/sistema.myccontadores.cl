@@ -41,7 +41,7 @@ export class AuthService {
 
   async login(authdata:any) {
     try {
-      const res = await axios.post('http://localhost:3000/auth/login', authdata)
+      const res = await axios.post(environment.API+'auth/login', authdata)
       if (res.status ==200){
         this.saveToken(res.data.token)
         const tokeninfo = helper.decodeToken(res.data.token)
