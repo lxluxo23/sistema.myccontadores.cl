@@ -35,12 +35,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   async onLogin(): Promise<void> {
     this.spinner.show();
-    const formValue = this.loginForm.value;
     const rut = this.loginForm.get('rut').value;
     const rutlimpio = cleanRut(rut);
     this.loginForm.get('rut').setValue(rutlimpio);
-
-    console.log(this.loginForm)
+    const formValue = this.loginForm.value;
+    console.log(formValue)
     let respuesta = await this.authService.login(formValue)
     if (respuesta) {
 

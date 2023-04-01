@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
       this.isAdmin = res
     )
     let user = this.authService.ObtenerinfoToken();
+    // console.log(user)
     this.nombreUsuario=user.nombre;
 
     ///// verificacion si esta logueado o no
