@@ -11,6 +11,7 @@ import { HomeComponent } from './shared/home/home.component';
 import { InterceptorService } from './interceptors/interceptor.service';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { AdminModule } from './admin/admin.module';
+import { PrimeNgModule } from './PrimeNg.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,10 +24,10 @@ import { AdminModule } from './admin/admin.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AdminModule
+    AdminModule,
+    PrimeNgModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     AuthService
   ],
   bootstrap: [AppComponent]

@@ -61,7 +61,7 @@ export class AgregarDocumentoComponent implements OnInit {
     formData.append('categoria', this.selectedCategoria.toString());
     formData.append('usuario', this.selectedUsuario.toString());
 
-    console.log(formData)
+    // console.log(formData)
     const token=localStorage.getItem('token') || null;
     if (token){
       axios.post(environment.API+'documentos', formData,{

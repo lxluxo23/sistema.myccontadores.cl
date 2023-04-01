@@ -1,3 +1,5 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > iniciando sesión </p></ngx-spinner>
+
 <div class="login-form animate__animated animate__zoomInDown">
   <mat-card class="mat-elevation-z5">
     <mat-card-content>
@@ -7,13 +9,20 @@
       </div>
       <br /><br />
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <mat-form-field class="full-width-input">
-          <input class="inputLogin" type="text" formControlName="email" matInput placeholder="Rut" required />
-        </mat-form-field>
+        <!-- <mat-form-field class="full-width-input">
+          <input class="inputLogin" type="text" formControlName="rut" matInput placeholder="Rut" required />
+        </mat-form-field> -->
 
-        <mat-form-field class="full-width-input separator">
+
+        <p-inputMask styleClass="input" p-inputMask mask="99.999.999.*" formControlName="rut"  placeholder="12.345.678-9" ></p-inputMask>
+
+        <!-- <mat-form-field class="full-width-input separator">
           <input class="inputLogin" type="password" formControlName="pass" matInput placeholder="Password" required />
-        </mat-form-field>
+        </mat-form-field> -->
+
+        <p-password id="password1" formControlName="pass" type="password" class="w-full" [feedback]="false" placeholder="Password"
+        styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
+        [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>
         <button type="submit" class="btn btn-primary color-button-login" mat-raised-button>
           <span class="color_text_login">Login</span>
         </button>

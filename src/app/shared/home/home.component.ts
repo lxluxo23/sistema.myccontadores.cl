@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../auth/auth.service';
 import { DocumentosService } from './documentos.service';
 import { environment } from 'src/environments/environment';
+interface Columna {
+  field: string;
+  header: string;
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,12 +20,19 @@ export class HomeComponent implements OnInit {
   isLogged: boolean = false;
   datos: any
   displayedColumns: string[] = ['id', 'nombre', 'createdAt', 'categoria', 'acciones'];
-
+  cols: Columna[] = [
+    { field: 'id', header: 'Id' },
+    { field: 'nombre', header: 'Nombre' },
+    { field: 'createdAt', header: 'Fecha de creación' },
+    { field: 'CategoriaDocumento.descripcion', header: 'Categoría de documento' },
+    { field: 'acciones', header: 'Acciones' }
+  ];
   private subscripcion: Subscription = new Subscription;
   constructor(
     private authservice: AuthService,
     private documentoService: DocumentosService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {

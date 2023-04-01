@@ -1,42 +1,38 @@
 <div>
-  <table mat-table [dataSource]="datos" class="mat-elevation-z8">
+  <p-table [value]="datos" [columns]="cols" [responsive]="true" styleClass="p-datatable-customers" class="p-datatable-sm">
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
-    </ng-container>
-
-    <!-- Columna nombre -->
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef> Nombre </th>
-      <td mat-cell *matCellDef="let row"> {{ row.nombre }} </td>
-    </ng-container>
-
-    <!-- Columna fecha de creación -->
-    <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef> Fecha de creación </th>
-      <td mat-cell *matCellDef="let row"> {{ row.createdAt }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="categoria">
-      <th mat-header-cell *matHeaderCellDef> Categoría de documento </th>
-      <td mat-cell *matCellDef="let row"> {{ row.CategoriaDocumento.descripcion }} </td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
-      <td mat-cell *matCellDef="let element">
-          <button mat-button matBadgeColor="accent" (click)="Descargar(element.nombre)" class="button_color_primary" style="background-color:rgb(37, 199, 228)">
-            <mat-icon style="color: white">archive</mat-icon>
-        </button> &nbsp;
-
-      </td>
-  </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
+    <!-- Columna Id -->
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td>
+          <span class="p-column-title titulo">ID</span>
+          {{ rowData.id }}
+        </td>
+        <td>
+          <span class="p-column-title titulo">Nombre</span>
+          {{ rowData.nombre }}
+        </td>
+        <td>
+          <span class="p-column-title titulo">Creado</span>
+          {{ rowData.createdAt }}
+        </td>
+        <td>
+          <span class="p-column-title titulo">Categoria</span>
+          {{ rowData.CategoriaDocumento.descripcion }}
+        </td>
+        <td>
+          <button pButton icon="pi pi-file-pdf" (click)="Descargar(rowData.nombre)" class="button_color_primary"
+            style="background-color:rgb(37, 199, 228)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

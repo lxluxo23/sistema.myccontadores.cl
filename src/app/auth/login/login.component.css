@@ -27,3 +27,29 @@ button {
 .inputLogin {
   text-align: center;
 }
+
+/* .p-inputtext {
+width: 100% !important;
+margin-bottom: 2rem !important;
+} */
+:host ::ng-deep .p-inputtext {
+ width: 100%;
+ margin-bottom: 1rem;
+}
+:host ::ng-deep .p-password-input {
+  width: 100%;
+  margin-bottom: 1rem;
+ }
+ :host ::ng-deep .p-password:enabled:focus {
+  border-color: #4CAF50; /* Cambia el color del borde cuando el input tiene foco */
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Agrega una sombra cuando el input tiene foco */
+}
+ /* .p-password-input{
+  width: 100%;
+ } */
+
+/* :host ::ng-deep .p-password-panel {
+  width: 100%;
+  margin-bottom: 1rem;
+ } */
+

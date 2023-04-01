@@ -46,13 +46,13 @@ export class AuthService {
         this.saveToken(res.data.token)
         const tokeninfo = helper.decodeToken(res.data.token)
         this.NombreUsuario = tokeninfo.usuario.nombre
-        this.role.next(tokeninfo.usuario.roles[0].nombre)
+        this.role.next(tokeninfo.usuario.roles[0].id)
         this.loggedIn.next(true)
         return res.data
       }
     }
     catch(error) {
-      alert("Error: " + error)
+      alert("Error al iniciar sesión " )
       console.error(error);
     }
   }
@@ -71,7 +71,7 @@ export class AuthService {
 
       const isExpired = helper.isTokenExpired(userToken);
       const tokeninfo = helper.decodeToken(userToken);
-      console.log(tokeninfo)
+      // console.log(tokeninfo)
 
       if (isExpired){
         this.logout()

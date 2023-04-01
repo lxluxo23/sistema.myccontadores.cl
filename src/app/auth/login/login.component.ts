@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-// import { AuthService } from '../auth.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms'
+import { NgxSpinnerService } from 'ngx-spinner';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OnDestroy } from '@angular/core';
-// import { AlertHelper } from 'src/app/shared/components/helpers/alert.helpers';
-// import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import Swal from 'sweetalert2';
 import { AuthService } from '../auth.service';
-
-// const helper = new JwtHelperService();
+import { cleanRut, validateRut, getLastDigitOfRut } from 'rutlib';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,61 +15,44 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private subscripcion: Subscription = new Subscription;
-
-
-
   loginForm = this.Fb.group({
-    email: ['', [Validators.required]],
+    rut: new FormControl('', [Validators.required]),
     pass: ['', [Validators.required]],
   });
-
-
-
-
   constructor(
     private authService: AuthService,
     private Fb: FormBuilder,
     private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
 
   ngOnInit(): void {
 
   }
-
   ngOnDestroy(): void {
     this.subscripcion.unsubscribe();
   }
-
-
-
   async onLogin(): Promise<void> {
-     const formValue = this.loginForm.value;
+    this.spinner.show();
+    const formValue = this.loginForm.value;
+    const rut = this.loginForm.get('rut').value;
+    const rutlimpio = cleanRut(rut);
+    this.loginForm.get('rut').setValue(rutlimpio);
 
-     let respuesta = await this.authService.login(formValue)
-     if(respuesta){
-      this.router.navigate(['']);
-     }
-    // const ValidarEmail = this.authService.esEmailValido(formValue.email_usuario)
+    console.log(this.loginForm)
+    let respuesta = await this.authService.login(formValue)
+    if (respuesta) {
 
-    // if (!ValidarEmail) {
-    //   this.alert.error_mail("Formato Email Invalido");
-    //   return;
-    // }
-    // this.alert.Login();
-    // this.subscripcion.add(
-    //   this.authService.login(formValue).subscribe((res) => {
-    //     if (res) {
-    //       const tokeninfo = helper.decodeToken(res.token)
-    //       Swal.close();
-    //       if (tokeninfo.user.rol = "ADMIN") {
-    //         this.router.navigate(['']);
-    //       }
-    //       else if (tokeninfo.user.rol = "TRABAJADOR") {
-    //         this.router.navigate(['']);
-    //       }
-    //     }
-    //   })
-    // );
+      this.authService.isAdmin.subscribe(res => {
+        if (res == "1") {
+          this.router.navigate(['/admin'])
+        }
+        else {
+          this.router.navigate(['']);
+        }
+      })
+    }
+    this.spinner.hide();
   }
 }
