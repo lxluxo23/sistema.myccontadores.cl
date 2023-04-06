@@ -9,7 +9,7 @@
       </div>
       <br /><br />
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <p-inputMask styleClass="input" p-inputMask mask="99.999.999-*" formControlName="rut"  placeholder="12.345.678-9" ></p-inputMask>
+        <p-inputMask characterPattern="[0-9kK]" styleClass="input" p-inputMask mask="99.999.999-*" formControlName="rut"  placeholder="12.345.678-9" ></p-inputMask>
         <p-password id="password1" formControlName="pass" type="password" class="w-full" [feedback]="false" placeholder="Password"
         styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
         [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>

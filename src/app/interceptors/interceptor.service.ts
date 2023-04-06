@@ -9,7 +9,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor() { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('funciona el interceptor?')
+    //console.log('funciona el interceptor?')
     const token=localStorage.getItem('token') || null;
     if (token){
       request = request.clone({

@@ -36,15 +36,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   async onLogin(): Promise<void> {
     this.spinner.show();
     const rut = this.loginForm.get('rut').value;
-    const rutlimpio = cleanRut(rut);
-    this.loginForm.get('rut').setValue(rutlimpio);
+    let rutlimpio = cleanRut(rut);
+    if (rutlimpio.charAt(0) === '0') {
+      rutlimpio = rutlimpio.substring(1);
+    }
+    this.loginForm.get('rut').setValue(rutlimpio.toLocaleUpperCase());
     const formValue = this.loginForm.value;
-    console.log(formValue)
+    // console.log(formValue)
     let respuesta = await this.authService.login(formValue)
     if (respuesta) {
 
       this.authService.isAdmin.subscribe(res => {
-        if (res == "1") {
+        // console.log(res)
+        if (res == true) {
           this.router.navigate(['/admin'])
         }
         else {

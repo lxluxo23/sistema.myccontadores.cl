@@ -16,6 +16,7 @@ interface Columna {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  categoriaSeleccionada: number
   isAdmin: boolean | string = false;
   isLogged: boolean = false;
   datos: any
@@ -26,6 +27,13 @@ export class HomeComponent implements OnInit {
     { field: 'createdAt', header: 'Fecha de creación' },
     { field: 'CategoriaDocumento.descripcion', header: 'Categoría de documento' },
     { field: 'acciones', header: 'Acciones' }
+  ];
+  categorias: any[] = [
+    { id: 1, descripcion: 'Ivas' },
+    { id: 2, descripcion: 'Renta' },
+    { id: 3, descripcion: 'Balances' },
+    { id: 4, descripcion: 'Carpeta tributaria' },
+    { id: 5, descripcion: 'Otros' }
   ];
   private subscripcion: Subscription = new Subscription;
   constructor(
@@ -49,20 +57,31 @@ export class HomeComponent implements OnInit {
 
     ///// verificacion si esta logueado o no
     if (!this.isLogged) {
-      console.log('no esta logueado?')
+      // console.log('no esta logueado?')
       this.router.navigate(['/login']);
     }
-
     this.Traerdatos()
   }
-
-  async Traerdatos() {
+  async Traerdatos(categoria?: number) {
+    this.spinner.show()
     this.datos = await this.documentoService.traerDocumentos()
-    //this.datos = new MatTableDataSource<any>(this.datos);
-    console.log(this.datos)
+    this.spinner.hide()
+    // console.log(this.datos)
+    if (categoria) {
+      let nuevoarr = this.datos = this.datos.filter((documento: any) => {
+        return documento.CategoriaDocumentoId == categoria
+      });
+      this.datos = nuevoarr
+
+    }
   }
   Descargar(nombre: any) {
-    window.open(environment.API+`archivos/` + nombre);
+    window.open(environment.API + `archivos/` + nombre);
   }
+
+  filtrarPorCategoria(event: any) {
+    this.Traerdatos(this.categoriaSeleccionada);
+  }
+
 
 }

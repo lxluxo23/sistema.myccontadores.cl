@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, map } from 'rxjs/operators';
@@ -19,12 +19,10 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   public NombreUsuario: string = ""
-  private role = new BehaviorSubject<any>("NULL");
   constructor(
     private router: Router,
   ) {
     this.checkToken();
-    this.ObtenerinfoToken();
   }
 
   get isLogged(): Observable<boolean> {
@@ -35,20 +33,14 @@ export class AuthService {
     return this.NombreUsuario;
   }
 
-  get isAdmin(): Observable<string> {
-    return this.role.asObservable();
-  }
 
   async login(authdata:any) {
     try {
       const res = await axios.post(environment.API+'auth/login', authdata)
       if (res.status ==200){
-        this.saveToken(res.data.token)
-        const tokeninfo = helper.decodeToken(res.data.token)
-        this.NombreUsuario = tokeninfo.usuario.nombre
-        this.role.next(tokeninfo.usuario.roles[0].id)
-        this.loggedIn.next(true)
-        return res.data
+        this.saveToken(res.data.token);
+        this.loggedIn.next(true); // actualice loggedIn a true después del inicio de sesión
+        return res.data;
       }
     }
     catch(error) {
@@ -58,53 +50,40 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.clear();
-    this.loggedIn.next(false)
-    this.router.navigate(['/login'])
+    localStorage.removeItem('token');
+    localStorage.removeItem('isAdmin'); // elimine la variable de administrador del almacenamiento local
+    this.loggedIn.next(false);
+    this.router.navigate(['/login']);
   }
 
   private checkToken(): boolean {
-
     let userToken = localStorage.getItem('token') || null;
-
     if (userToken) {
-
       const isExpired = helper.isTokenExpired(userToken);
-      const tokeninfo = helper.decodeToken(userToken);
-      // console.log(tokeninfo)
-
       if (isExpired){
-        this.logout()
-        return false
-      }
-      else{
-        localStorage.setItem('rol', tokeninfo.usuario.roles[0].nombre);
+        this.logout();
+        return false;
+      } else {
         this.loggedIn.next(true);
-        return true
+        return true;
       }
-
-      // localStorage.setItem('rol', tokeninfo.user.rol);
-      // if (isExpired) {
-      //   userToken = ''
-      //   this.logout()
-      //   return false;
-      // } else {
-
-      //   this.loggedIn.next(true);
-      //   this.role.next(tokeninfo.user.rol)
-      //   return true
-      // }
-    }
-    else {
-      console.log("no existe token")
-      return false
+    } else {
+      console.log("no existe token");
+      this.loggedIn.next(false);
+      return false;
     }
   }
 
   private saveToken(token: string): void {
-
     localStorage.setItem('token', token);
+    const tokeninfo = helper.decodeToken(token);
+    if (tokeninfo.usuario.roles[0].id==1){
+      localStorage.setItem('isAdmin', 'true'); // agregue la variable isAdmin al almacenamiento local
+    }
+  }
 
+  get isAdmin(): Observable<boolean> {
+    return of(localStorage.getItem('isAdmin') === 'true'); // convierta el valor almacenado en string a booleano
   }
 
   public ObtenerinfoToken(){
@@ -116,29 +95,5 @@ export class AuthService {
     else {
       this.logout();
     }
-  }
-
-  private handlerError(err: any): Observable<never> {
-    console.log(err)
-    let errorMessage = "Ha ocurrido un error recibiendo la data";
-    if (err) {
-      // errorMessage = `Error: code ${err.error.msg}`;
-      errorMessage = `Error: ${err.error.msg}`;
-    }
-    // this.alert.error_small('Error de conexion con la base de datos ');
-    // this.alert.error_small(errorMessage);
-    return throwError(err.message);
-  }
-
-  esEmailValido(email: string): boolean {
-    let mailValido = false;
-    'use strict';
-
-    // var EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    var EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    if (email.match(EMAIL_REGEX)) {
-      mailValido = true;
-    }
-    return mailValido;
   }
 }

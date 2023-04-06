@@ -1,4 +1,12 @@
-<div>
+<ng-container *ngIf="datos.length < 1">
+  <p>No hay datos disponibles.</p>
+</ng-container>
+
+<br>
+<div class="grid p-fluid">
+    <p-dropdown id="category-filter" [options]="categorias" [(ngModel)]="categoriaSeleccionada"
+    optionLabel="descripcion" optionValue="id" placeholder="Seleccionar una categoría" (onChange)="filtrarPorCategoria($event)"></p-dropdown>
+  <br>
   <p-table [value]="datos" [columns]="cols" [responsive]="true" styleClass="p-datatable-customers" class="p-datatable-sm">
 
     <!-- Columna Id -->
@@ -18,7 +26,7 @@
         </td>
         <td>
           <span class="p-column-title titulo">Nombre</span>
-          {{ rowData.nombre }}
+          {{ rowData.nombreoriginal }}
         </td>
         <td>
           <span class="p-column-title titulo">Creado</span>
