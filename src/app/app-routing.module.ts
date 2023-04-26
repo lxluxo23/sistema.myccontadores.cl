@@ -8,6 +8,7 @@ import { AdminguardGuard } from 'src/guards/adminguard.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule), canActivate: [CheckLoginGuard] },
+  { path: 'usuario', loadChildren: () => import('./admin/usuario/usuario.module').then(m => m.UsuarioModule), canActivate: [AdminguardGuard]},
   {
     path: 'admin',
     component: AgregarDocumentoComponent,

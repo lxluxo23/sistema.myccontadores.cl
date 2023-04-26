@@ -12,6 +12,9 @@ import { InterceptorService } from './interceptors/interceptor.service';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { AdminModule } from './admin/admin.module';
 import { PrimeNgModule } from './PrimeNg.module';
+import { UsuarioModule } from './admin/usuario/usuario.module';
+import { AlertHelper } from 'src/helpers/alert.helpers';
+import { ConfirmationService, MessageService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,10 +28,14 @@ import { PrimeNgModule } from './PrimeNg.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     AdminModule,
-    PrimeNgModule
+    PrimeNgModule,
+    UsuarioModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AlertHelper,
+    MessageService,
+    ConfirmationService,
   ],
   bootstrap: [AppComponent]
 })

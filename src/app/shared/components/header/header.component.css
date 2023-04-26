@@ -1,16 +1,15 @@
-.spacer {
-  flex: 1 1 auto;
+.p-toolbar {
+  background-color: #4b4c4d !important;
+  color: #ffffff !important;
+}
+.p-button {
+  margin-right: 0.5em !important;
+}
+.p-toolbar-separator {
+  margin-right: 0.5em !important;
+  margin-left: 0.5em !important;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
-.header {
-  background-color: #2844a4;
-}
-
-.menuColor {
-  color: white;
+::ng-deep.swal2-container {
+  z-index: 1000000;
 }

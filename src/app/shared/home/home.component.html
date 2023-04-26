@@ -2,45 +2,48 @@
   <p>No hay datos disponibles.</p>
 </ng-container>
 
-<br>
-<div class="grid p-fluid">
+<div class="grid">
+  <div class="col-12 md:col-12">
     <p-dropdown id="category-filter" [options]="categorias" [(ngModel)]="categoriaSeleccionada"
     optionLabel="descripcion" optionValue="id" placeholder="Seleccionar una categoría" (onChange)="filtrarPorCategoria($event)"></p-dropdown>
-  <br>
-  <p-table [value]="datos" [columns]="cols" [responsive]="true" styleClass="p-datatable-customers" class="p-datatable-sm">
+  </div>
+  <div class="col-12 md:col-12">
+    <p-table [value]="datos" [columns]="cols" [responsive]="true" styleClass="p-datatable-customers" class="p-datatable-sm">
 
-    <!-- Columna Id -->
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-          {{col.header}}
-          <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr>
-        <td>
-          <span class="p-column-title titulo">ID</span>
-          {{ rowData.id }}
-        </td>
-        <td>
-          <span class="p-column-title titulo">Nombre</span>
-          {{ rowData.nombreoriginal }}
-        </td>
-        <td>
-          <span class="p-column-title titulo">Creado</span>
-          {{ rowData.createdAt }}
-        </td>
-        <td>
-          <span class="p-column-title titulo">Categoria</span>
-          {{ rowData.CategoriaDocumento.descripcion }}
-        </td>
-        <td>
-          <button pButton icon="pi pi-file-pdf" (click)="Descargar(rowData.nombre)" class="button_color_primary"
-            style="background-color:rgb(37, 199, 228)"></button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+      <!-- Columna Id -->
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td>
+            <span class="p-column-title titulo">ID</span>
+            {{ rowData.id }}
+          </td>
+          <td>
+            <span class="p-column-title titulo">Nombre</span>
+            {{ rowData.nombreoriginal }}
+          </td>
+          <td>
+            <span class="p-column-title titulo">Creado</span>
+            {{ rowData.createdAt }}
+          </td>
+          <td>
+            <span class="p-column-title titulo">Categoria</span>
+            {{ rowData.CategoriaDocumento.descripcion }}
+          </td>
+          <td>
+            <button pButton icon="pi pi-file-pdf" (click)="Descargar(rowData.nombre)" class="button_color_primary"
+              style="background-color:rgb(37, 199, 228)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
 </div>

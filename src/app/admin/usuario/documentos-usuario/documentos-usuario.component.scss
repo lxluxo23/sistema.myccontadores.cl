@@ -1,0 +1,37 @@
+
+/* General */
+$scale:14px;                    /* main font size */
+$borderRadius:12px;             /* border radius of layout element e.g. card, sidebar */
+$transitionDuration:.2s;        /* transition duration of layout elements e.g. sidebar, overlay menus */
+
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--card-shadow);
+  border-radius: $borderRadius;
+
+  &:last-child {
+      margin-bottom: 0;
+  }
+}
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  // min-height: 100vh;
+  // justify-content: space-between;
+  padding: 2rem 2rem 2rem 2rem;
+  // transition: margin-left $transitionDuration;
+}
+
+.elementos {
+  background-color: transparent;
+  transition: background-color 0.5s ease;
+}
+
+.elementos:hover {
+  background-color: rgb(172, 168, 168);
+  cursor: pointer;
+}
+

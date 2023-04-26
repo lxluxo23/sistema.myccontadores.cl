@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <div class="grid">
+    <div class="col-12 md:col-6">
+      <input type="text" id="nombre" formControlName="nombre" placeholder="Nombre" pInputText>
+    </div>
+    <div class="col-12 md:col-6">
+      <!-- <input type="text" id="rut" formControlName="rut" placeholder="Rut" pInputText> -->
+      <p-inputMask characterPattern="[0-9kK]" p-inputMask mask="99.999.999-*" [style]="{'width':'100%'}" formControlName="rut"  placeholder="12.345.678-9" ></p-inputMask>
+    </div>
+    <div class="col-12 md:col-4">
+      <input type="email" id="email" formControlName="email" placeholder="Email@email.com" pInputText>
+    </div>
+    <div class="col-12 md:col-4">
+      <p-password id="password1" formControlName="pass1" type="password" class="w-full" [feedback]="false" placeholder="Password"
+      styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
+      [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>
+      <!-- <p-password  formControlName="pass" placeholder="Contraseña" [toggleMask]="true"></p-password> -->
+    </div>
+    <div class="col-12 md:col-4">
+      <p-password id="password2" formControlName="pass2" type="password" class="w-full" [feedback]="false" placeholder="Password"
+      styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
+      [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>
+    </div>
+  </div>
+  <div class="col-12">
+    <p-button (onClick)="Guardar()" [disabled]="form.invalid" label="Guardar"></p-button>
+  </div>
+</form>

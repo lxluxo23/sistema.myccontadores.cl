@@ -1,36 +1,21 @@
-<mat-toolbar class="header">
-  <ng-container *ngIf="isAdmin == 'TRABAJADOR'; else viewAdmin">
-    <div *ngIf="isLogged">
-      <!-- <button mat-icon-button>
-        <mat-icon style="color: white">menu</mat-icon>
-      </button> -->
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <a *ngIf="!isAdmin" href="https://myccontadores.cl"  pButton label="Volver"></a>
+    <!-- <a *ngIf="isLogged && isAdmin" pButton icon="pi pi-user" label="{{ nombreUsuario | uppercase }}"></a> -->
+    <a *ngIf="isLogged" pButton icon="pi pi-home" routerLink="/"></a>
+    <div *ngIf="isLogged && isAdmin">
+      <p-toast></p-toast>
+      <p-menu #menu [model]="items" [popup]="true"></p-menu>
+      <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" label="Usuarios"></button>
     </div>
-    <span class="spacer"></span>
-    <div>
-      <a *ngIf="!isLogged; else viewLogout" mat-button routerLink="/login"
-        >Login</a
-      >
-    </div>
-  </ng-container>
-</mat-toolbar>
-
-<ng-template #viewLogout>
-  <a mat-button (click)="onLogout()">Salir</a>
-</ng-template>
-
-<ng-template #viewAdmin>
-  <div *ngIf="isLogged">
-    <!-- <button mat-icon-button>
-      <mat-icon style="color: white">menu</mat-icon>
-    </button> -->
-    <span style="padding-top: 20px; color: white"
-      >{{ nombreUsuario | uppercase }}
-    </span>
   </div>
+  <div class="p-toolbar-group-right">
+    <!-- <a *ngIf="isLogged && !isAdmin" pButton icon="pi pi-user" label="{{ nombreUsuario | uppercase }}"></a> -->
+    <span class="p-toolbar-separator" *ngIf="isLogged && !isAdmin"></span>
+    <a *ngIf="isLogged" pButton icon="pi pi-power-off" label="Salir" (click)="onLogout()"></a>
 
-  <span class="spacer"></span>
-  <div>
-    <a *ngIf="!isLogged; else viewLogout">BIENVENIDO</a>
-    <!-- mat-button routerLink="/login" -->
   </div>
-</ng-template>
+</p-toolbar>
+<p-dialog header="Crear Usuario" [draggable]=false [modal]="true" [baseZIndex]="1000" [style]="{width: '75vw'}" [(visible)]="displayModal">
+<app-agregar-usuario (guardarexitoso)="Recargar()"></app-agregar-usuario>
+</p-dialog>

@@ -81,6 +81,7 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import { TreeTableModule } from 'primeng/treetable';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import {EditorModule} from 'primeng/editor';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 const myModules = [
   AccordionModule,
@@ -165,7 +166,7 @@ const myModules = [
   VirtualScrollerModule,
   EditorModule,
   StyleClassModule,
-
+  DynamicDialogModule
 ];
 
 
