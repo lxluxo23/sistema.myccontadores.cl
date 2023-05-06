@@ -63,9 +63,7 @@ export class HomeComponent implements OnInit {
     this.Traerdatos()
   }
   async Traerdatos(categoria?: number) {
-    this.spinner.show()
     this.datos = await this.documentoService.traerDocumentos()
-    this.spinner.hide()
     // console.log(this.datos)
     if (categoria) {
       let nuevoarr = this.datos = this.datos.filter((documento: any) => {

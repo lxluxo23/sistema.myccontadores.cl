@@ -37,6 +37,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     MessageService,
     ConfirmationService,
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

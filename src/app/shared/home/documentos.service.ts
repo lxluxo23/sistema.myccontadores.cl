@@ -41,12 +41,14 @@ export class DocumentosService {
   async traerDocumentosPorUsuario(id:number){
     const token=localStorage.getItem('token') || null;
     if (token){
+      this.alert.loadingAlert()
       try{
         const res = await axios.get(environment.API+'documentos/'+id,{
           headers:{
             Authorization:'Bearer ' + token
           }
         })
+        Swal.close()
         return res.data.datos;
       }
       catch(error){

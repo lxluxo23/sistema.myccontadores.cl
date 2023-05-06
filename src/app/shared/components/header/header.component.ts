@@ -62,6 +62,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
     if (!this.isLogged) {
     this.router.navigate(['/login']);
     }
+
+    this.subscripcion.add(
+      this.authService.isAdmin.subscribe(res => {
+        this.isAdmin = res;
+      })
+    );
   }
 
   ngOnDestroy(): void {

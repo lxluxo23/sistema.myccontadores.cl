@@ -4,7 +4,7 @@ export class AlertHelper {
 
     loadingAlert() {
         Swal.fire(
-            {title: 'Espere', text: 'Guardando informacion', icon: 'info', allowOutsideClick: false}
+            {title: 'Espere', text: 'Obteniendo informacion', icon: 'info', allowOutsideClick: false}
         )
         Swal.showLoading();
     }

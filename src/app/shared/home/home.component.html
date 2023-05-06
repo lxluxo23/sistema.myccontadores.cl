@@ -1,12 +1,17 @@
-<ng-container *ngIf="datos.length < 1">
+<!-- <ng-container *ngIf="datos.length < 1">
   <p>No hay datos disponibles.</p>
-</ng-container>
-
-<div class="grid">
+</ng-container> -->
+<div class="contenedor">
   <div class="col-12 md:col-12">
-    <p-dropdown id="category-filter" [options]="categorias" [(ngModel)]="categoriaSeleccionada"
-    optionLabel="descripcion" optionValue="id" placeholder="Seleccionar una categoría" (onChange)="filtrarPorCategoria($event)"></p-dropdown>
+    <p-dropdown id="category-filter"  [style]="{'width':'100%'}" [options]="categorias" [(ngModel)]="categoriaSeleccionada"
+    optionLabel="descripcion" optionValue="id" (onChange)="filtrarPorCategoria($event)" placeholder="Seleccionar una categoría" ></p-dropdown>
   </div>
+</div>
+<div class="grid">
+  <!-- <div class="col-12 md:col-12">
+    <p-dropdown id="category-filter"  [style]="{'width':'100%'}" [options]="categorias" [(ngModel)]="categoriaSeleccionada"
+    optionLabel="descripcion" optionValue="id" (onChange)="filtrarPorCategoria($event)" placeholder="Seleccionar una categoría" ></p-dropdown>
+  </div> -->
   <div class="col-12 md:col-12">
     <p-table [value]="datos" [columns]="cols" [responsive]="true" styleClass="p-datatable-customers" class="p-datatable-sm">
 
