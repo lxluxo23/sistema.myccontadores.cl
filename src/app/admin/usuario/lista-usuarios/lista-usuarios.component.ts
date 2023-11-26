@@ -56,7 +56,7 @@ export class ListaUsuariosComponent implements OnInit {
   }
   async TraerUsuarios() {
     const token = localStorage.getItem('token') || null;
-
+    this.alert.loadingAlert()
     if (token) {
       await axios.get(environment.API + 'usuario', {
         headers: {
@@ -64,9 +64,11 @@ export class ListaUsuariosComponent implements OnInit {
         }
       }).then(res => {
         this.usuarios = res.data.datos;
+        Swal.close()
         // console.log(this.usuarios);
       }).catch(err => {
         console.error(err);
+        Swal.close()
       })
     }
 
